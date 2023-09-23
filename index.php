@@ -2,12 +2,20 @@
 
 session_start();
 
+require_once __DIR__ . '/createCards.php';
+
 $deck = [];
-$cardsOnBoard = [];
+$cardsFirstColumn = [];
+$cardsSecondColumn = [];
+$cardsThirdColumn = [];
+$cardsFourthColumn = [];
 
 if (isset($_POST['reset']) && isset($_SESSION['deck'])) {
     unset($_SESSION['deck']);
-    unset($_SESSION['cardsOnBoard']);
+    unset($_SESSION['cardsFirstColumn']);
+    unset($_SESSION['cardsSecondColumn']);
+    unset($_SESSION['cardsThirdColumn']);
+    unset($_SESSION['cardsFourthColumn']);
 }
 
 if (!isset($_SESSION['deck'])) {
@@ -15,37 +23,21 @@ if (!isset($_SESSION['deck'])) {
 } else {
     // get session data
     $deck = $_SESSION['deck'];
-    $deck = array_splice($deck, 4);
-    $cardsOnBoard = [...$_SESSION['cardsOnBoard'], ...array_splice($deck, 0, 4)];
-
+    $cardsForNewRound = array_splice($deck, 0, 4);
+    $cardsFirstColumn = [...$_SESSION['cardsFirstColumn'], $cardsForNewRound[0]];
+    $cardsSecondColumn = [...$_SESSION['cardsSecondColumn'], $cardsForNewRound[1]];
+    $cardsThirdColumn = [...$_SESSION['cardsThirdColumn'], $cardsForNewRound[2]];
+    $cardsFourthColumn = [...$_SESSION['cardsFourthColumn'], $cardsForNewRound[3]];
+    
     // save updated session data
     $_SESSION['deck'] = $deck;
-    $_SESSION['cardsOnBoard'] = $cardsOnBoard;
+    $_SESSION['cardsFirstColumn'] = $cardsFirstColumn;
+    $_SESSION['cardsSecondColumn'] = $cardsSecondColumn;
+    $_SESSION['cardsThirdColumn'] = $cardsThirdColumn;
+    $_SESSION['cardsFourthColumn'] = $cardsFourthColumn;
 }
 
-function createDeck() {
-    global $deck, $cardsOnBoard;
-
-    $ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-    $suits = ['C', 'D', 'H', 'S'];
-    
-    foreach($suits as $suit) {
-        foreach($ranks as $rank) {
-            $deck[] = [
-                'suit' => $suit,
-                'rank' => $rank
-            ];
-        }
-    }
-    
-    shuffle($deck);
-
-    $cardsOnBoard = array_splice($deck, 0, 4);
-    $_SESSION['cardsOnBoard'] = $cardsOnBoard;
-    
-    $deck = array_splice($deck, 4);
-    $_SESSION['deck'] = $deck;
-}
+$columnContainer = [$cardsFirstColumn, $cardsSecondColumn, $cardsThirdColumn, $cardsFourthColumn];
 
 ?>
 
@@ -60,13 +52,17 @@ function createDeck() {
 <body>
     <form class="playing-board-form" method="post">
         <section class="playing-board">
-            <?php foreach($cardsOnBoard as $card): ?>
-            <div class="card-container card-size <?php echo ($card['suit'] === 'H' || $card['suit'] === 'D') ? 'card-color' : ''; ?>">
-                <h3><?= $card['rank'] ?></h3>
-                <h1><?= $card['suit'] ?></h1>
-                <h3><?= $card['rank'] ?></h3>
-            </div>
-            <?php endforeach; ?>
+            <?php for ($i = 0; $i < 4; $i++): ?>
+                <div class="cards-column">
+                    <?php foreach($columnContainer[$i] as $key => $card): ?>
+                    <div class="card-container card-size <?php echo ($card['suit'] === 'H' || $card['suit'] === 'D') ? 'card-color' : ''; ?>" style="top: <?= $key * 20; ?>px">
+                        <h3><?= $card['rank']; ?></h3>
+                        <h1><?= $card['suit']; ?></h1>
+                        <h3><?= $card['rank']; ?></h3>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endfor; ?>
         </section>
         <section class="user-interaction-container">
             <button type="submit" class="back-of-card card-size">

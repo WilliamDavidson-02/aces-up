@@ -6,6 +6,7 @@ body {
     margin: 0;
     width: 100vw;
     height: 100vh;
+    background-color: rgb(56, 135, 56);
 }
 
 .playing-board {
@@ -22,7 +23,15 @@ body {
     height: calc(303px / 2);
 }
 
+.cards-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
 .card-container {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -32,6 +41,7 @@ body {
     padding: 10px;
     cursor: pointer;
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .card-container h3 {
@@ -68,7 +78,7 @@ body {
 
 .discard-pile {
     border-radius: 5px;
-    background-color: #d4d4d4;
+    background-color: rgb(50, 128, 50);
 }
 
 .back-of-card {
@@ -77,6 +87,7 @@ body {
     border: none;
     cursor: pointer;
     padding: 0;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .back-of-card img {
