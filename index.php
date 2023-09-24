@@ -24,12 +24,19 @@ if (!isset($_SESSION['deck'])) {
     createDeck();
 } else if (isset($_POST['newRound'])) {
     $deck = $_SESSION['deck'];
-    $cardsForNewRound = array_splice($deck, 0, 4);
-    $cardsFirstColumn = [...$_SESSION['cardsFirstColumn'], $cardsForNewRound[0]];
-    $cardsSecondColumn = [...$_SESSION['cardsSecondColumn'], $cardsForNewRound[1]];
-    $cardsThirdColumn = [...$_SESSION['cardsThirdColumn'], $cardsForNewRound[2]];
-    $cardsFourthColumn = [...$_SESSION['cardsFourthColumn'], $cardsForNewRound[3]];
+    $cardsFirstColumn = $_SESSION['cardsFirstColumn'];
+    $cardsSecondColumn = $_SESSION['cardsSecondColumn'];
+    $cardsThirdColumn = $_SESSION['cardsThirdColumn'];
+    $cardsFourthColumn = $_SESSION['cardsFourthColumn'];
 
+    if (!empty($deck)) {
+        $cardsForNewRound = array_splice($deck, 0, 4);
+        $cardsFirstColumn[] = $cardsForNewRound[0];
+        $cardsSecondColumn[] = $cardsForNewRound[1];
+        $cardsThirdColumn[] = $cardsForNewRound[2];
+        $cardsFourthColumn[] = $cardsForNewRound[3];
+    }
+    
     $discardPile = $_SESSION['discardPile'];
 
     $_SESSION['deck'] = $deck;
@@ -79,6 +86,7 @@ $columnContainer = [$cardsFirstColumn, $cardsSecondColumn, $cardsThirdColumn, $c
         </section>
         <section class="user-interaction-container">
             <button type="submit" name="newRound" class="back-of-card card-size">
+                <div><?php echo (count($deck) / 4 <= 5) ? count($deck) / 4 : ''; ?></div>
                 <img src="./images/Card_back_01.svg" alt="">
             </button>
             <div class="discard-pile card-size">
