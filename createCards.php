@@ -1,7 +1,7 @@
 <?php
 
 function createDeck() {
-    global $deck, $cardsFirstColumn, $cardsSecondColumn, $cardsThirdColumn, $cardsFourthColumn;
+    global $deck, $cardsFirstColumn, $cardsSecondColumn, $cardsThirdColumn, $cardsFourthColumn, $discardPile;
 
     $ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
     $suits = ['C', 'D', 'H', 'S'];
@@ -22,11 +22,13 @@ function createDeck() {
     $_SESSION['cardsSecondColumn'] = [$cardsForNewRound[1]];
     $_SESSION['cardsThirdColumn'] = [$cardsForNewRound[2]];
     $_SESSION['cardsFourthColumn'] = [$cardsForNewRound[3]];
+    $_SESSION['discardPile'] = [];
 
     $cardsFirstColumn = $_SESSION['cardsFirstColumn'];
     $cardsSecondColumn = $_SESSION['cardsSecondColumn'];
     $cardsThirdColumn = $_SESSION['cardsThirdColumn'];
     $cardsFourthColumn = $_SESSION['cardsFourthColumn'];
+    $discardPile = $_SESSION['discardPile'];
     
     $_SESSION['deck'] = $deck;
 }

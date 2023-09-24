@@ -39,6 +39,13 @@ body {
     position: relative;
 }
 
+.bg-card {
+    position: absolute;
+    top: 0;
+    background-color: rgb(50, 128, 50);
+    border-radius: 5px;
+}
+
 .card-container {
     position: absolute;
     display: flex;
