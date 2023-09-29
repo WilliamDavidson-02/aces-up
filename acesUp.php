@@ -1,20 +1,31 @@
 <?php
+session_start();
+
 require_once __DIR__ . '/header.php';
 require __DIR__ . '/createDeck.php';
 
-session_start();
+$newRoundOfCards = array_splice($deck, 0, 4);
+
 $cardsOnBoardColumns = [
-    'firstColumn' => [],
-    'secondColumn' => [],
-    'thirdColumn' => [],
-    'fourthColumn' => [],
-]
+    'firstColumn' => [...$_SESSION['firstColumn'], $newRoundOfCards[0]],
+    'secondColumn' => [...$_SESSION['secondColumn'], $newRoundOfCards[1]],
+    'thirdColumn' => [...$_SESSION['thirdColumn'], $newRoundOfCards[2]],
+    'fourthColumn' => [...$_SESSION['fourthColumn'], $newRoundOfCards[3]],
+];
 ?>
 
 <main class="aces-up-container">
     <section class="game-board-container">
         <?php foreach ($cardsOnBoardColumns as $column) : ?>
-            <div>This is a column</div>
+            <div class="card-column">
+                <?php foreach ($column as $key => $card) : ?>
+                    <div class="card card-size" style="top: <?= $key * 20 ?>;">
+                        <h3><?= $card['rank'] ?></h3>
+                        <h3><?= $card['suit'] ?></h3>
+                        <h3><?= $card['rank'] ?></h3>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         <?php endforeach; ?>
     </section>
     <form class="aces-game-controls" method="post">

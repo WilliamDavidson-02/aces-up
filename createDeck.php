@@ -14,3 +14,9 @@ foreach ($suits as $suit) {
 }
 
 shuffle($deck);
+
+
+$_SESSION['firstColumn'] = [];
+$_SESSION['secondColumn'] = [];
+$_SESSION['thirdColumn'] = [];
+$_SESSION['fourthColumn'] = [];
