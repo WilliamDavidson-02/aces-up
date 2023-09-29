@@ -1,135 +1,126 @@
+:root {
+    --bg-color: #36594a;
+    --bg-green-shadow: #335546;
+    --border-color: #17251f;
+    --text-color-light: #fff;
+    --text-color-dark: #000;
+}
+
 * {
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
+    padding: 0;
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(56, 135, 56);
+    background: var(--bg-color);
+    color: var(--text-color-light);
+}
+
+main {
+    height: 100%;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+a {
+    color: var(--text-color-light);
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    font-size: 1.2rem;
+}
+
+button {
+    outline: none;
+    cursor: pointer;
+}
+
+/* Custom classes */
+
+.main-game-menu {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.playing-board-form {
-    width: 100%;
-    max-width: 800px;
-    height: 100%;
-    display: flex;
-}
-
-.playing-board {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    justify-items: center;
-    gap: 20px;
+.start-game-container {
+    background: var(--bg-green-shadow);
     padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.start-game-container a {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px 0px;
+    transition: .2s;
+}
+
+.start-game-container a:hover {
+    background: var(--bg-color);
+    transition: .2s;
+}
+
+.aces-up-container {
+    display: flex;
+    gap: 50px;
+}
+
+.game-board-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
 }
 
 .card-size {
-    width: 104px;
-    height: calc(303px / 2);
+    width: 208px;
+    height: 303px;
+    border-radius: 10px;
 }
 
-.cards-column {
+.aces-game-controls {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-.bg-card {
-    position: absolute;
-    top: 0;
-    background-color: rgb(50, 128, 50);
-    border-radius: 5px;
-}
-
-.card-container {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 5px;
-    border: black 1px solid;
-    padding: 10px;
-    cursor: pointer;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-}
-
-.card-container h3 {
-    margin: 0;
-}
-
-.card-container h3:first-child {
-    width: 100%;
-    text-align: start;
-}
-
-.card-color {
-    color: red;
-}
-
-.card-container h3:last-child {
-    width: 100%;
-    text-align: end;
-}
-
-.user-interaction-container {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+    gap: 20px;
     justify-content: center;
-    padding: 50px;
 }
 
-.discard-pile {
-    border-radius: 5px;
-    background-color: rgb(50, 128, 50);
-}
-
-.back-of-card {
+.round-btn {
     background: none;
-    outline: none;
     border: none;
-    cursor: pointer;
     padding: 0;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    position: relative;
 }
 
-.back-of-card div {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 5rem;
-    color: rgba(0, 0, 0, 0.5);
+.round-btn img {
+    max-width: 100%;
 }
 
-.back-of-card img {
-    width: 100%;
-    height: 100%;
+.empty-card-container {
+    background: var(--bg-green-shadow);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
 }
 
-.reset-game {
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: rgb(207, 61, 61);
-    padding: 5px;
-    color: white;
-    transition: ease .2s;
+.new-game {
+    padding: 10px 0;
+    transition: .2s;
 }
 
-.reset-game:hover {
-    transition: ease .2s;
-    background-color: rgb(178, 52, 52);
+.new-game:hover {
+    transition: .2s;
+    background: var(--bg-color);
 }
