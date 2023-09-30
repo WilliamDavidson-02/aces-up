@@ -29,7 +29,7 @@ if (!empty($deck) && isset($_POST['newRound']) || isset($_POST['newGame'])) {
         $_SESSION[$column] = $cardsOnBoardColumns[$column];
     }
     $_SESSION['deck'] = $deck;
-} else if (isset($_POST['cardToRemove'])) {
+} else if (isset($_POST['selectedCard'])) {
     cardActions();
 } else {
     foreach ($columnsMap as $column) {
@@ -42,10 +42,13 @@ if (!empty($deck) && isset($_POST['newRound']) || isset($_POST['newGame'])) {
 <form method="post" class="aces-up-container">
     <section class="game-board-container">
         <?php foreach ($cardsOnBoardColumns as $index => $column) : ?>
-            <div class="card-column <?= (count($column) === 0) ? 'card-size empty-card-container' : ''; ?>" style="<?= (count($column) === 0) ? 'flex-grow: 0;' : ''; ?>">
+            <div class="card-column">
+                <?php if (count($column) === 0) : ?>
+                    <div class="card-size empty-card-container"></div>
+                <?php endif; ?>
                 <?php foreach ($column as $key => $card) :
                     if (count($column) === $key + 1) : ?>
-                        <button type="submit" name="cardToRemove" value="<?= $index ?>" class="card card-size <?= ($card['suit'] == '♥' || $card['suit'] == '♦') ? 'red-card' : ''; ?>" style="top: <?= $key * 40 ?>px;">
+                        <button type="submit" name="selectedCard" value="<?= $index ?>" class="card card-size <?= ($card['suit'] == '♥' || $card['suit'] == '♦') ? 'red-card' : ''; ?>" style="top: <?= $key * 40 ?>px;">
                             <h3><?= $card['rank'] ?></h3>
                             <h3><?= $card['suit'] ?></h3>
                             <h3><?= $card['rank'] ?></h3>

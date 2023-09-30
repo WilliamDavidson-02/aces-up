@@ -163,8 +163,8 @@ button {
 .card-column {
     display: flex;
     justify-content: center;
-    flex-grow: 1;
     position: relative;
+    width: 25%;
 }
 
 .count-down-container {
