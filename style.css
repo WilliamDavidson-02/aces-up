@@ -21,7 +21,7 @@ body {
     color: var(--text-color-light);
 }
 
-main {
+main, form {
     height: 100%;
     width: 100%;
     max-width: 1200px;
@@ -84,6 +84,7 @@ button {
 .game-board-container {
     flex-grow: 1;
     display: flex;
+    justify-content: space-between;
     gap: 5px;
     max-width: 100%;
     margin-top: 20px;
@@ -92,6 +93,12 @@ button {
 .card-size {
     width: 158px;
     height: 253px;
+    border-radius: 10px;
+}
+
+.empty-card-container {
+    background: var(--bg-green-shadow);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
 }
 
@@ -111,12 +118,6 @@ button {
 
 .round-btn img {
     max-width: 100%;
-}
-
-.empty-card-container {
-    background: var(--bg-green-shadow);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
 }
 
 .new-game {
@@ -141,6 +142,8 @@ button {
 }
 
 .card h3 {
+    text-align: start;
+    width: 100%;
     margin: 0;
     font-size: 2rem;
 }
@@ -173,4 +176,8 @@ button {
     align-items: center;
     color: rgba(0, 0, 0, .4);
     font-size: 7rem;
+}
+
+.discard {
+    position: static;
 }
