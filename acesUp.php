@@ -3,6 +3,7 @@ session_start();
 
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/cardActions.php';
+require_once __DIR__ . '/cardContent.php';
 
 $columnsMap = ['firstColumn', 'secondColumn', 'thirdColumn', 'fourthColumn'];
 $cardsOnBoardColumns = [];
@@ -49,11 +50,25 @@ if (!empty($deck) && isset($_POST['newRound']) || isset($_POST['newGame'])) {
                 <?php foreach ($column as $key => $card) :
                     if (count($column) === $key + 1) : ?>
                         <button type="submit" name="selectedCard" value="<?= $index ?>" class="card card-size <?= ($card['suit'] == '♥' || $card['suit'] == '♦') ? 'red-card' : ''; ?>" style="top: <?= $key * 40 ?>px;">
-                            <?php require __DIR__ . '/cardContent.php'; ?>
+                            <?php cardContentType($card) ?>
+                            <h3><?= $card['rank'] ?></h3>
+                            <div class="suit-container <?= $rankGrid ?>">
+                                <?php for ($i = 0; $i < $rankValue; $i++) : ?>
+                                    <h3><?= $card['suit'] ?></h3>
+                                <?php endfor; ?>
+                            </div>
+                            <h3 class="last-rank"><?= $card['rank'] ?></h3>
                         </button>
                     <?php else : ?>
                         <div class="card card-size <?= ($card['suit'] == '♥' || $card['suit'] == '♦') ? 'red-card' : ''; ?>" style="top: <?= $key * 40 ?>px;">
-                            <?php require __DIR__ . '/cardContent.php'; ?>
+                            <?php cardContentType($card) ?>
+                            <h3><?= $card['rank'] ?></h3>
+                            <div class="suit-container <?= $rankGrid ?>">
+                                <?php for ($i = 0; $i < $rankValue; $i++) : ?>
+                                    <h3><?= $card['suit'] ?></h3>
+                                <?php endfor; ?>
+                            </div>
+                            <h3 class="last-rank"><?= $card['rank'] ?></h3>
                         </div>
                 <?php endif;
                 endforeach; ?>
@@ -69,9 +84,14 @@ if (!empty($deck) && isset($_POST['newRound']) || isset($_POST['newGame'])) {
         </button>
         <div class="empty-card-container discard card-size <?= (!empty($discardPile) && ($discardPile['suit'] == '♥' || $discardPile['suit'] == '♦')) ? 'red-card' : ''; ?> <?= (!empty($discardPile)) ? 'card' : ''; ?>">
             <?php if (!empty($discardPile)) : ?>
+                <?php cardContentType($discardPile) ?>
                 <h3><?= $discardPile['rank'] ?></h3>
-                <h3><?= $discardPile['suit'] ?></h3>
-                <h3><?= $discardPile['rank'] ?></h3>
+                <div class="suit-container <?= $rankGrid ?>">
+                    <?php for ($i = 0; $i < $rankValue; $i++) : ?>
+                        <h3><?= $discardPile['suit'] ?></h3>
+                    <?php endfor; ?>
+                </div>
+                <h3 class="last-rank"><?= $discardPile['rank'] ?></h3>
             <?php endif; ?>
         </div>
         <button class="new-game empty-card-container" type="submit" name="newGame">New game</button>
