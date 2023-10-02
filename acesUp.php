@@ -49,15 +49,11 @@ if (!empty($deck) && isset($_POST['newRound']) || isset($_POST['newGame'])) {
                 <?php foreach ($column as $key => $card) :
                     if (count($column) === $key + 1) : ?>
                         <button type="submit" name="selectedCard" value="<?= $index ?>" class="card card-size <?= ($card['suit'] == '♥' || $card['suit'] == '♦') ? 'red-card' : ''; ?>" style="top: <?= $key * 40 ?>px;">
-                            <h3><?= $card['rank'] ?></h3>
-                            <h3><?= $card['suit'] ?></h3>
-                            <h3><?= $card['rank'] ?></h3>
+                            <?php require __DIR__ . '/cardContent.php'; ?>
                         </button>
                     <?php else : ?>
                         <div class="card card-size <?= ($card['suit'] == '♥' || $card['suit'] == '♦') ? 'red-card' : ''; ?>" style="top: <?= $key * 40 ?>px;">
-                            <h3><?= $card['rank'] ?></h3>
-                            <h3><?= $card['suit'] ?></h3>
-                            <h3><?= $card['rank'] ?></h3>
+                            <?php require __DIR__ . '/cardContent.php'; ?>
                         </div>
                 <?php endif;
                 endforeach; ?>
