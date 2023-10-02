@@ -80,7 +80,7 @@ if (!empty($deck) && isset($_POST['newRound']) || isset($_POST['newGame'])) {
             <?php if (count($deck) / 4 <= 5) : ?>
                 <div class="count-down-container"><?= (count($deck) / 4); ?></div>
             <?php endif; ?>
-            <img src="/images/Card_back_01.svg" alt="button of card">
+            <img src="./images/Card_back_01.svg" alt="button of card">
         </button>
         <div class="empty-card-container discard card-size <?= (!empty($discardPile) && ($discardPile['suit'] == '♥' || $discardPile['suit'] == '♦')) ? 'red-card' : ''; ?> <?= (!empty($discardPile)) ? 'card' : ''; ?>">
             <?php if (!empty($discardPile)) : ?>
